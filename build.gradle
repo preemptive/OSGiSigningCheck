@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'osgi'
+
+defaultTasks 'build'
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile 'org.osgi:org.osgi.core:4.0.0'
+}
+
+group 'com.preEmptive'
+version '1.0'
+jar {
+	baseName 'SignedOSGiExample'
+	manifest{
+		name = 'SignedOSGiExample'
+		instruction 'Bundle-Vendor', 'PreEmptive Solutions'
+        instruction 'Bundle-Description', 'A bundle which reports if the OSGi framework ignores signing certificates.'
+		instruction 'Bundle-Activator', 'com.preEmptive.example.signedOSGi.SignedActivator'
+	}
+}
+
+jar.doLast { 
+ ant.signjar(
+ jar: project.tasks.jar.outputs.files.getSingleFile(),
+ alias:"app",
+ keystore:"keystore.ks",
+ storepass:"password",
+ preservelastmodified:"true")
+}
