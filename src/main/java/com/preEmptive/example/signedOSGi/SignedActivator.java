@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.CodeSource;
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -48,7 +49,11 @@ public class SignedActivator implements BundleActivator {
 		}
 		try {
 			for (int i = 0; i < size; i++) {
-				System.out.println(certs[i].getEncoded());
+				if (certs[i] instanceof X509Certificate) {
+					System.out.println("Certificate Principal: "+ ((X509Certificate)certs[i]).getSubjectX500Principal());
+				} else {
+					System.out.println("Certificate Type: "+certs[i].getType());
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("Error with the certificates-----");

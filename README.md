@@ -13,7 +13,7 @@ Starting SignedOSGiExample...
 SignedOSGiExample was loaded by {an OSGi implementation specific ClassLoader}.  
 Checking certificates...  
 There is 1 certificate in {the URL location of the bundle}.  
-[B@71cc81b0  
+Certificate Principal: CN=Example Alias, OU=Development, O=PreEmptive Solutions, L=Mayfield Village, ST=OH, C=US  
 SignedOSGiExample is still signed.
 
 ### Unsigned Output
