@@ -14,6 +14,7 @@ import org.osgi.framework.BundleContext;
 public class SignedActivator implements BundleActivator {
 
 	private static BundleContext context;
+	private static boolean printEquinoxProperties=false;
 
 	static BundleContext getContext() {
 		return context;
@@ -26,12 +27,17 @@ public class SignedActivator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		SignedActivator.context = bundleContext;
 		System.out.println("\nStarting SignedOSGiExample...\n");
-		System.out.format("SignedOSGiExample was loaded by %s\n.", getClass().getClassLoader().getClass().getName());
+		System.out.format("SignedOSGiExample was loaded by %s.\n", getClass().getClassLoader().getClass().getName());
 		System.out.println("Checking certificates...");
 		CodeSource cs = getClass().getProtectionDomain().getCodeSource();
 		Certificate[] certs = cs.getCertificates();
 		boolean hasCertificates = printCerts(certs, cs.getLocation().toString());
 		System.out.format("SignedOSGiExample is %s.\n", hasCertificates?"still signed":"no longer signed");
+		if (printEquinoxProperties) {
+			System.out.println("Equinox Related Properties...");
+			printProperty("osgi.signedcontent.support");
+			printProperty("osgi.support.class.certificate");
+		}
 	}
 
 	/**
@@ -61,6 +67,19 @@ public class SignedActivator implements BundleActivator {
 			System.out.println("\n-----");
 		}
 		return size>0;
+	}
+	
+	/**
+	* Prints out the setting of a system property.
+	* @param propName The property name.
+	*/
+	private void printProperty(String propName) {
+		String val = System.getProperty(propName);
+		if (val == null) {
+			System.out.format("%s is not set.\n", propName);
+		} else {
+			System.out.format("%s = '%s'.\n", propName, val);
+		}
 	}
 
 	/*
