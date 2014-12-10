@@ -15,6 +15,7 @@ public class SignedActivator implements BundleActivator {
 
 	private static BundleContext context;
 	private static boolean printEquinoxProperties=false;
+	private static boolean printFelixProperties=false;
 
 	static BundleContext getContext() {
 		return context;
@@ -34,9 +35,15 @@ public class SignedActivator implements BundleActivator {
 		boolean hasCertificates = printCerts(certs, cs.getLocation().toString());
 		System.out.format("SignedOSGiExample is %s.\n", hasCertificates?"still signed":"no longer signed");
 		if (printEquinoxProperties) {
-			System.out.println("Equinox Related Properties...");
+			System.out.println("\nEquinox Related Properties...");
 			printProperty("osgi.signedcontent.support");
 			printProperty("osgi.support.class.certificate");
+		}
+		if (printFelixProperties) {
+			System.out.println("\nFelix Related Properties...");
+			printProperty("org.osgi.framework.security");
+			printProperty("org.osgi.framework.trust.repositories");
+			printProperty("java.security.policy");
 		}
 	}
 

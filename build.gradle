@@ -15,6 +15,7 @@ group 'com.preEmptive'
 version '1.0'
 jar {
 	baseName 'SignedOSGiExample'
+	//destinationDir = file ("./")
 	manifest{
 		name = 'SignedOSGiExample'
 		instruction 'Bundle-Vendor', 'PreEmptive Solutions'

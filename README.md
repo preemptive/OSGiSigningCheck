@@ -22,3 +22,9 @@ SignedOSGiExample was loaded by {an OSGi implementation specific ClassLoader}.
 Checking certificates...  
 There are 0 certificates in {the URL location of the bundle}.  
 SignedOSGiExample is no longer signed.
+
+##Equinox Settings
+Out of the box, the Equinox implementation will not load the certificates. To run with equinox, pass _-Dosgi.signedcontent.support=certificate_ when launching.  If that does not work, make sure you are not passing _-Dosgi.support.class.certificate=false_.  See [http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fmisc%2Fruntime-options.html](http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fmisc%2Fruntime-options.html) for more details.
+
+##Felix Settings
+Out of the box, the Felix implementation will not load the certificates.  To run with equinox, install the _org.apache.felix.framework.security_ bundle and pass _-Djava.security.policy={sample directory}/all.policy_, _-Dorg.osgi.framework.security="osgi"_, and  _-Dorg.osgi.framework.trust.repositories={sample directory}/certs.ks_ when launching.  See [http://felix.apache.org/site/apache-felix-framework-security.html](http://felix.apache.org/site/apache-felix-framework-security.html) for additional details.
