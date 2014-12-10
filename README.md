@@ -26,5 +26,9 @@ SignedOSGiExample is no longer signed.
 ##Equinox Settings
 Out of the box, the [Equinox](http://eclipse.org/equinox/) implementation will not load the certificates. To run with [Equinox](http://eclipse.org/equinox/), pass _-Dosgi.signedcontent.support=certificate_ when launching.  If that does not work, make sure you are not passing _-Dosgi.support.class.certificate=false_.  See [http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fmisc%2Fruntime-options.html](http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fmisc%2Fruntime-options.html) for more details.
 
+To verify the settings are properly incorporated, modify  _src/main/java/com/preEmptive/example/signedOSGi/SignedActivator.java_ and set _printEquinoxProperties_ to _true_.  Then recompile and install.
+
 ##Felix Settings
 Out of the box, the [Felix](http://felix.apache.org) implementation will not load the certificates.  To run with [Felix](http://felix.apache.org), install the _org.apache.felix.framework.security_ bundle and pass _-Djava.security.policy={sample directory}/all.policy_, _-Dorg.osgi.framework.security="osgi"_, and  _-Dorg.osgi.framework.trust.repositories={sample directory}/certs.ks_ when launching.  See [http://felix.apache.org/site/apache-felix-framework-security.html](http://felix.apache.org/site/apache-felix-framework-security.html) for additional details.
+
+To verify the settings are properly incorporated, modify  _src/main/java/com/preEmptive/example/signedOSGi/SignedActivator.java_ and set _printFelixProperties_ to _true_.  Then recompile and install.
